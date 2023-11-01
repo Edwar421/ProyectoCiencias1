@@ -5,58 +5,60 @@
 
 #include "Ciudad.h"
 
-#include "Partido.h"
+#include "Sucursal.h"
 
 using namespace std;
 
 class Empleado {
-private: string nombre;
+private: 
+	string nombre;
     string apellido;
-    string puesto; //puesto al que aspira
+    string tipoIdentificacion;
     string numIdentificacion;
     char sexo;
-    string estadoCivil;
+    string telefonoCelular;
+    string telefonoFijo;
+    string email;
     string fechaNacimiento;
     Ciudad ciudadNacimiento;
     Ciudad ciudadResidencia;
-    Partido partido;
-    int votos;
+    Ciudad direccionResidencia;
+    Ciudad barrioResidencia;
+    Sucursal sucursal;
+    
 
 public: Empleado() {
         nombre = "";
         apellido = "";
-        tipoIdentificacion = 'T';
+        tipoIdentificacion = "";
         numIdentificacion = "";
         sexo = 'N';
-        telefonoCelular = 0;
-        telefonoFijo = 0;
+        telefonoCelular = "";
+        telefonoFijo = "";
         email = "";
         fechaNacimiento = "";
-        ciudadNacimiento = "";
-        paisNacimiento = "";
-        ciudadResidencia = "";
-        direccion = "";
-        barrio = "";
         actividadLaboral = 'A';
         hijos = 'H';
-        cantidadHijos = 0;
-        votos = 0;
     }
 
-    Empleado(string nombre, string apellido, string puesto, string numIdentificacion,
-              char sexo, string estadoCivil, string fechaNacimiento,
-              Ciudad ciudadNacimiento, Ciudad ciudadResidencia, Partido partido, int votos) {
+    Empleado(string nombre, string apellido, string tipoIdentificacion, string numIdentificacion, char sexo, string telefonoCelular,
+			string telefonoFijo, string email, string fechaNacimiento, Ciudad ciudadNacimiento, Ciudad ciudadResidencia, Ciudad direccionResidencia, 
+			Ciudad barrioResidencia, Sucursal sucursal) {
         this -> nombre = nombre;
         this -> apellido = apellido;
-        this -> puesto = puesto;
+        this -> tipoIdentificacion = tipoIdentificacion;
         this -> numIdentificacion = numIdentificacion;
         this -> sexo = sexo;
-        this -> estadoCivil = estadoCivil;
+        this -> telefonoCelular = telefonoCelular;
+        this -> telefonoFijo = telefonoFijo;
+        this -> email = email;
         this -> fechaNacimiento = fechaNacimiento;
         this -> ciudadNacimiento = ciudadNacimiento;
         this -> ciudadResidencia = ciudadResidencia;
-        this -> partido = partido;
-        this -> votos = votos;
+        this -> direccionResidencia = direccionResidencia;
+        this -> barrioResidencia = barrioResidencia;
+        this -> sucursal = sucursal;
+        
     }
 
     // M�todos getter para acceder a los atributos
@@ -69,8 +71,8 @@ public: Empleado() {
     string getNombreCompleto() {
         return nombre + " " + apellido;
     }
-    string getPuesto() {
-        return puesto;
+    string gettipoIdentificacion() {
+        return tipoIdentificacion;
     }
     string getNumIdentificacion() {
         return numIdentificacion;
@@ -78,8 +80,14 @@ public: Empleado() {
     char getSexo() {
         return sexo;
     }
-    string getEstadoCivil() {
-        return estadoCivil;
+    string getTelefonoCelular() {
+        return telefonoCelular;
+    }
+    string getTelefonoFijo() {
+        return telefonoFijo;
+    }
+    string getEmail() {
+        return email;
     }
     string getFechaNacimiento() {
         return fechaNacimiento;
@@ -90,28 +98,31 @@ public: Empleado() {
     Ciudad getCiudadResidencia() {
         return ciudadResidencia;
     }
-    Partido getPartido() {
-        return partido;
+    Ciudad getDireccionResidencia() {
+        return direccionResidencia;
     }
-    int getVotos() {
-        return votos;
+    Ciudad getBarrioResidencia() {
+        return barrioResidencia;
     }
+    Sucursal getSucursal(){
+    	return sucursal;
+	}
+    
 
     //setters
-
-    void setNombre(const string & nombre) {
+    void setNombre(string nombre) {
         Candidato::nombre = nombre;
     }
 
-    void setApellido(const string & apellido) {
+    void setApellido(string apellido) {
         Candidato::apellido = apellido;
     }
 
-    void setPuesto(const string & puesto) {
-        Candidato::puesto = puesto;
+    void settipoIdentificacion(string tipoIdentificacion) {
+        Candidato::tipoIdentificacion = tipoIdentificacion;
     }
 
-    void setNumIdentificacion(const string & numIdentificacion) {
+    void setNumIdentificacion(string numIdentificacion) {
         Candidato::numIdentificacion = numIdentificacion;
     }
 
@@ -119,29 +130,41 @@ public: Empleado() {
         Candidato::sexo = sexo;
     }
 
-    void setEstadoCivil(const string & estadoCivil) {
-        Candidato::estadoCivil = estadoCivil;
+    void setTelefonoCelular(string telefonoCelular) {
+        Candidato::telefonoCelular = telefonoCelular;
+    }
+    
+    void setTelefonoFijo(string telefonoFijo) {
+        Candidato::telefonoFijo = telefonofijo;
+    }
+    
+    void setEmail(string email) {
+        Candidato::email = email;
     }
 
-    void setFechaNacimiento(const string & fechaNacimiento) {
+    void setFechaNacimiento(string fechaNacimiento) {
         Candidato::fechaNacimiento = fechaNacimiento;
     }
 
-    void setCiudadNacimiento(const Ciudad & ciudadNacimiento) {
+    void setCiudadNacimiento(Ciudad ciudadNacimiento) {
         Candidato::ciudadNacimiento = ciudadNacimiento;
     }
 
-    void setCiudadResidencia(const Ciudad & ciudadResidencia) {
+    void setCiudadResidencia(Ciudad ciudadResidencia) {
         Candidato::ciudadResidencia = ciudadResidencia;
     }
-
-    void setPartido(const Partido & partido) {
-        Candidato::partido = partido;
+    
+    void setDireccionResidencia(Ciudad direccionResidencia) {
+        Candidato::direccionResidencia = direccionResidencia;
     }
 
-    void setVotos(int votos) {
-        Candidato::votos = votos;
+    void setBarrioResidencia(Ciudad barrioResidencia) {
+        Candidato::barrioResidencia = barrioResidencia;
     }
+    void setSucursal(Sucursal sucursal) {
+        Candidato::sucursal = sucursal;
+    }
+
 };
 
 #endif
