@@ -16,7 +16,7 @@ public:
     }
 
     void setNombre(string nombre) {
-        this->nombre = nombre;
+        Pais::nombre = nombre;
     }
 };
 

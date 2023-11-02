@@ -9,6 +9,7 @@ private:
     string nombreCiudad;
     string nombreBarrio;
     string direccion;
+    Pais pais;
 
 public:
     Ciudad() {
@@ -17,10 +18,11 @@ public:
         direccion = "";
     }
 
-    Ciudad(string nombreCiudad, string nombreBarrio, string direccion) {
+    Ciudad(string nombreCiudad, string nombreBarrio, string direccion, Pais pais) {
         this->nombreCiudad = nombreCiudad;
         this->nombreBarrio = nombreBarrio;
         this->direccion = direccion;
+        this->pais = pais;
     }
 
     // Getters
@@ -35,18 +37,26 @@ public:
     string getDireccion() {
         return direccion;
     }
+    
+    Pais getPais() {
+        return pais;
+    }
 
     // Setters
     void setNombreCiudad(string nombreCiudad) {
-        this->nombreCiudad = nombreCiudad;
+        Ciudad::nombreCiudad = nombreCiudad;
     }
 
     void setNombreBarrio(string nombreBarrio) {
-        this->nombreBarrio = nombreBarrio;
+        Ciudad::nombreBarrio = nombreBarrio;
     }
 
     void setDireccion(string direccion) {
-        this->direccion = direccion;
+        Ciudad::direccion = direccion;
+    }
+    
+    void setPais(Pais pais) {
+        Ciudad::pais = pais;
     }
 };
 
