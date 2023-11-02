@@ -1,3 +1,8 @@
+#ifndef SUCURSAL_H
+#define SUCURSAL_H
+
+#inclide "Ciudad.h"
+
 #include <string>
 using namespace std;
 
@@ -13,8 +18,11 @@ class Sucursal {
     	
     	Sucursal() {} // Constructor vac�o
     	
-        Sucursal(string nombreSucursal, string gerenteSucursal) {
+        Sucursal(string nombreSucursal, Ciudad ciudadSucursal, Ciudad barrioSucursal, Ciudad direccionSucursal, string gerenteSucursal) {
             this->nombreSucursal = nombreSucursal;
+            this->ciudadSucursal = ciudadSucursal;
+            this->barrioSucursal = barrioSucursal;
+            this->direccionSucursal = direccionSucursal;
             this->gerenteSucursal = gerenteSucursal;
         }
 
@@ -22,8 +30,20 @@ class Sucursal {
         string getNombreSucursal() { 
 			return nombreSucursal; 
 		}
+		
+		Ciudad getCiudadSucursal() {
+	        return ciudadSucursal;
+	    }
+	    
+	    Ciudad getBarrioSucursal() {
+	        return barrioSucursal;
+	    }
+	    
+	    Ciudad getDireccionSucursal() {
+	        return direccionSucursal;
+	    }
+		
         string getGerenteSucursal() { 
-			
 			return gerenteSucursal; 
 		}
         
@@ -34,11 +54,26 @@ class Sucursal {
 	        return datos;
 	    }
 
-    void setNombreSucursal(const string &nombreSucursal) {
+    
+    void setNombreSucursal(string nombreSucursal) {
         Sucursal::nombreSucursal = nombreSucursal;
     }
+    
+    void setCiudadSucursal(Ciudad ciudadSucursal) {
+        Sucursal::ciudadSucursal = ciudadSucursal;
+    }
+    
+    void setBarrioSucursal(Ciudad barrioSucursal) {
+        Sucursal::barrioSucursal = barrioSucursal;
+    }
+    
+    void setDireccionSucursal(Ciudad direccionSucursal) {
+        Sucursal::direccionSucursal = direccionSucursal;
+    }
 
-    void setgerenteSucursal(const string &gerenteSucursal) {
+    void setgerenteSucursal(string gerenteSucursal) {
         Sucursal::gerenteSucursal = gerenteSucursal;
     }
 };
+
+#endif

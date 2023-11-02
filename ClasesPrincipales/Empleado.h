@@ -7,6 +7,8 @@
 
 #include "Sucursal.h"
 
+#inlude "Pais.h"
+
 using namespace std;
 
 class Empleado {
@@ -20,10 +22,12 @@ private:
     string telefonoFijo;
     string email;
     string fechaNacimiento;
+    Pais paisNacimiento;
     Ciudad ciudadNacimiento;
     Ciudad ciudadResidencia;
     Ciudad direccionResidencia;
     Ciudad barrioResidencia;
+    
     Sucursal sucursal;
     
 
@@ -42,7 +46,7 @@ public: Empleado() {
     }
 
     Empleado(string nombre, string apellido, string tipoIdentificacion, string numIdentificacion, char sexo, string telefonoCelular,
-			string telefonoFijo, string email, string fechaNacimiento, Ciudad ciudadNacimiento, Ciudad ciudadResidencia, Ciudad direccionResidencia, 
+			string telefonoFijo, string email, string fechaNacimiento, Pais paisNacimiento, Ciudad ciudadNacimiento, Ciudad ciudadResidencia, Ciudad direccionResidencia, 
 			Ciudad barrioResidencia, Sucursal sucursal) {
         this -> nombre = nombre;
         this -> apellido = apellido;
@@ -53,6 +57,7 @@ public: Empleado() {
         this -> telefonoFijo = telefonoFijo;
         this -> email = email;
         this -> fechaNacimiento = fechaNacimiento;
+        this -> paisNacimiento = paisNacimiento;
         this -> ciudadNacimiento = ciudadNacimiento;
         this -> ciudadResidencia = ciudadResidencia;
         this -> direccionResidencia = direccionResidencia;
@@ -92,6 +97,9 @@ public: Empleado() {
     string getFechaNacimiento() {
         return fechaNacimiento;
     }
+    Pais getPaisNacimiento() {
+        return paisNacimiento;
+    }
     Ciudad getCiudadNacimiento() {
         return ciudadNacimiento;
     }
@@ -111,60 +119,63 @@ public: Empleado() {
 
     //setters
     void setNombre(string nombre) {
-        Candidato::nombre = nombre;
+        Empleado::nombre = nombre;
     }
 
     void setApellido(string apellido) {
-        Candidato::apellido = apellido;
+        Empleado::apellido = apellido;
     }
 
     void settipoIdentificacion(string tipoIdentificacion) {
-        Candidato::tipoIdentificacion = tipoIdentificacion;
+        Empleado::tipoIdentificacion = tipoIdentificacion;
     }
 
     void setNumIdentificacion(string numIdentificacion) {
-        Candidato::numIdentificacion = numIdentificacion;
+        Empleado::numIdentificacion = numIdentificacion;
     }
 
     void setSexo(char sexo) {
-        Candidato::sexo = sexo;
+        Empleado::sexo = sexo;
     }
 
     void setTelefonoCelular(string telefonoCelular) {
-        Candidato::telefonoCelular = telefonoCelular;
+        Empleado::telefonoCelular = telefonoCelular;
     }
     
     void setTelefonoFijo(string telefonoFijo) {
-        Candidato::telefonoFijo = telefonofijo;
+        Empleado::telefonoFijo = telefonofijo;
     }
     
     void setEmail(string email) {
-        Candidato::email = email;
+        Empleado::email = email;
     }
 
     void setFechaNacimiento(string fechaNacimiento) {
-        Candidato::fechaNacimiento = fechaNacimiento;
+        Empleado::fechaNacimiento = fechaNacimiento;
+    }
+    
+    void setPaisNacimiento(Pais paisNacimiento) {
+        Empleado::paisNacimiento = paisNacimiento;
     }
 
     void setCiudadNacimiento(Ciudad ciudadNacimiento) {
-        Candidato::ciudadNacimiento = ciudadNacimiento;
+        Empleado::ciudadNacimiento = ciudadNacimiento;
     }
 
     void setCiudadResidencia(Ciudad ciudadResidencia) {
-        Candidato::ciudadResidencia = ciudadResidencia;
+        Empleado::ciudadResidencia = ciudadResidencia;
     }
     
     void setDireccionResidencia(Ciudad direccionResidencia) {
-        Candidato::direccionResidencia = direccionResidencia;
+        Empleado::direccionResidencia = direccionResidencia;
     }
 
     void setBarrioResidencia(Ciudad barrioResidencia) {
-        Candidato::barrioResidencia = barrioResidencia;
+        Empleado::barrioResidencia = barrioResidencia;
     }
     void setSucursal(Sucursal sucursal) {
-        Candidato::sucursal = sucursal;
+        Empleado::sucursal = sucursal;
     }
-
 };
 
 #endif
