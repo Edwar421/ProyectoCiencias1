@@ -92,7 +92,8 @@ Empleado Inicializar::inicializarEmpleado(Lista < Sucursal > * sucursales, Lista
     // Insertar Empleado (Se necesita validaci�n de puesto, fecha nacimiento, estado civil)
 
     int OpcionSucursal, OpcionNacimiento, OpcionResidencia;
-    string nombre, apellido, puesto, numIdentificacion, estadoCivil, fechaNacimiento;
+    string nombre, apellido, tipoIdentificacion, numIdentificacion, telefonoCelular, telefonoFijo, email, fechaNacimiento, paisNacimiento, direccionResidencia, 
+			barrioResidencia, sucursal;
     char sexo;
 
     bool EmpleadoValido = false;
@@ -199,7 +200,9 @@ Empleado Inicializar::inicializarEmpleado(Lista < Sucursal > * sucursales, Lista
     Ciudad ciudadNacimiento = ciudades -> buscar(OpcionNacimiento);
     Ciudad ciudadResidencia = ciudades -> buscar(OpcionResidencia);
 
-    Empleado empleado(nombre, apellido, puesto, numIdentificacion, sexo, estadoCivil, fechaNacimiento, ciudadNacimiento, ciudadResidencia, Sucursal);
+    Empleado empleado(nombre, apellido, tipoIdentificacion, numIdentificacion, sexo, telefonoCelular,
+			telefonoFijo, email, fechaNacimiento, paisNacimiento, ciudadNacimiento, ciudadResidencia, direccionResidencia, 
+			barrioResidencia, sucursal);
 
     return Empleado;
 }
