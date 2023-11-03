@@ -10,15 +10,15 @@ class Sucursal {
     private:
         string nombreSucursal;
         Ciudad ciudadSucursal;
-        Ciudad barrioSucursal;
-        Ciudad direccionSucursal;
+        string barrioSucursal;
+        string direccionSucursal;
         string gerenteSucursal;
 
     public:
     	
     	Sucursal() {} // Constructor vac�o
     	
-        Sucursal(string nombreSucursal, Ciudad ciudadSucursal, Ciudad barrioSucursal, Ciudad direccionSucursal, string gerenteSucursal) {
+        Sucursal(string nombreSucursal, Ciudad ciudadSucursal, string barrioSucursal, string direccionSucursal, string gerenteSucursal) {
             this->nombreSucursal = nombreSucursal;
             this->ciudadSucursal = ciudadSucursal;
             this->barrioSucursal = barrioSucursal;
@@ -35,11 +35,11 @@ class Sucursal {
 	        return ciudadSucursal;
 	    }
 	    
-	    Ciudad getBarrioSucursal() {
+	    string getBarrioSucursal() {
 	        return barrioSucursal;
 	    }
 	    
-	    Ciudad getDireccionSucursal() {
+	    string getDireccionSucursal() {
 	        return direccionSucursal;
 	    }
 		
@@ -63,11 +63,11 @@ class Sucursal {
         Sucursal::ciudadSucursal = ciudadSucursal;
     }
     
-    void setBarrioSucursal(Ciudad barrioSucursal) {
+    void setBarrioSucursal(string barrioSucursal) {
         Sucursal::barrioSucursal = barrioSucursal;
     }
     
-    void setDireccionSucursal(Ciudad direccionSucursal) {
+    void setDireccionSucursal(string direccionSucursal) {
         Sucursal::direccionSucursal = direccionSucursal;
     }
 

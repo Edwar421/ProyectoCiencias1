@@ -8,152 +8,157 @@
 
 #include "../OpcionesEstadisticas.cpp"
 
+using namespace std;
+
 class Inicializar {
 private: OpcionesListas opcionLista;
 public:
-    //Metodos para inicializar los partidos , ciudades y candidatos
+    //Metodos para inicializar las sucursales , ciudades y los empleados
     //Con el fin de obtener los datos a la hora de insertar o modificar sin necesidad de repetir codigo
-    Partido inicializarPartido(Lista < Partido > * partidos);
+    Partido inicializarPartido(Lista < Sucursal > * sucursales);
     Ciudad inicializarCiudad();
-    Candidato inicializarCandidato(Lista < Partido > * partidos, Lista < Ciudad > * ciudades, Lista < Candidato > * candidatos);
+    Candidato inicializarCandidato(Lista < Sucursal > * sucursales, Lista < Ciudad > * ciudades, Lista < Empleado > * empleados);
 };
 
-Partido Inicializar::inicializarPartido(Lista < Partido > * partidos) {
-    //Insertar Partido
-    string NombrePartido, RepresentanteLegal;
+Sucursal Inicializar::inicializarSucursal(Lista < Sucursal > * sucursales) {
+    //Insertar Sucursal
+    string nombreSucursal, Ciudad ciudadSucursal, string barrioSucursal, string direccionSucursal, string gerenteSucursal;
 
-    bool partidoValido = false;
+	int opcionCiudadSucursal;
+    bool SucursalValido = false;
     int i = 0;
 
-    while (!partidoValido) {
-	    cout << "Ingrese el nombre del Partido: ";
-	    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	    getline(std::cin, NombrePartido);
+    while (!SucursalValido) {
+	    cout << "Ingrese el nombre del Sucursal: ";
+	    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	    getline(cin, nombreSucursal);
+	    
+	    cout << "De las siguientes ciudades, ¿Cual de ella se encuentra la sucursal?" << endl;
+        opcionLista.mostrarCiudades(ciudades);
+        opcionCiudadSucursal = leerEntrada(0,ciudades->getTam()-1);
+        
+        cout << "Ingrese el nombre del Barrio donde se encuentra la Sucursal: ";		
+	    getline(cin, barrioSucursal);
+	    
+	    cout << "Ingrese la direccion de la Sucursal: ";		
+	    getline(cin, direccionSucursal);
 	
-	    cout << "Ingrese el nombre del Representante legal: ";
-	    getline(std::cin, RepresentanteLegal);
+	    cout << "Ingrese el nombre del Gerente de la Sucursal: ";		
+	    getline(cin, gerenteSucursal);
 
-        for (i = 0; i < partidos -> getTam(); i++) {
-            Partido partidoAuxiliar = partidos -> buscar(i);
-            if (partidoAuxiliar.getNombre() == NombrePartido || partidoAuxiliar.getRepresentanteLegal() == RepresentanteLegal) {
-                cout << "El Nombre del partido ya existe o ya hay un representante legal en un partido" << endl;
+        for (i = 0; i < sucursales -> getTam(); i++) {
+            Sucursal SucursalAuxiliar = sucursales -> buscar(i);
+            if (SucursalAuxiliar.getNombre() == NombreSucursal || SucursalAuxiliar.getGerenteSucursal() == GerenteSucursal) {
+                cout << "El Nombre del Sucursal ya existe o ya hay un representante legal en un Sucursal" << endl;
                 break;
             }
         }
 
-        // Si el bucle for se completï¿½ sin encontrar coincidencias, el partido es vï¿½lido
-        if (i == partidos -> getTam()) {
-            partidoValido = true;
+        // Si el bucle for se completï¿½ sin encontrar coincidencias, el Sucursal es vï¿½lido
+        if (i == sucursales -> getTam()) {
+            SucursalValido = true;
         }
     }
-    Partido partido(NombrePartido, RepresentanteLegal);
+    
+    Ciudad ciudadSucursal = ciudades -> buscar(OpcionCiudadSucursal);
+    
+    Sucursal Sucursal(nombreSucursal, ciudadSucursal, barrioSucursal, direccionSucursal, gerenteSucursal);
+    
+    
 
-    return partido;
+    return Sucursal;
 }
 
 Ciudad Inicializar::inicializarCiudad() {
     //Se ingresan los datos de la nueva ciudad (Se necesita validaciï¿½n cuando la ciudad ya existe)
-    string nombre, departamento;
-    int tamConcejo, censoElectoral;
+    string nombreCiudad, nombreBarrio, direccion, pais;
     cout << "Ingrese el nombre de la ciudad" << endl;
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    getline(std::cin, nombre);
-    cout << "Ingrese el departamento de la ciudad" << endl;
-    getline(std::cin, departamento);
-    cout << "Ingrese el tamaï¿½o del concejo" << endl;
-    tamConcejo = leerEntrada(7,21);
-    cout << "Ingrese el tamaï¿½o el censo electoral" << endl;
-    censoElectoral = leerEntrada(1,5000000);
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, nombreCiudad);
+    /*
+	cout << "Ingrese el barrio" << endl;
+    getline(cin, nombreBarrio);
+    cout << "Ingrese la direccion" << endl;
+    getline(cin, direccion);
+    cout << "Ingrese el Pais" << endl;
+    getline(cin, pais);*/
 
-    Ciudad ciudad(nombre, departamento, tamConcejo, censoElectoral);
+    Ciudad ciudad(nombreCiudad);
 
     return ciudad;
 }
 
-Candidato Inicializar::inicializarCandidato(Lista < Partido > * partidos, Lista < Ciudad > * ciudades, Lista < Candidato > * candidatos) {
-    // Insertar Candidato (Se necesita validaciï¿½n de puesto, fecha nacimiento, estado civil)
+Empleado Inicializar::inicializarEmpleado(Lista < Sucursal > * sucursales, Lista < Ciudad > * ciudades, Lista < Empleado > * empleados) {
+    // Insertar Empleado (Se necesita validaciï¿½n de puesto, fecha nacimiento, estado civil)
 
-    int OpcionPartido, OpcionNacimiento, OpcionResidencia;
+    int OpcionSucursal, OpcionNacimiento, OpcionResidencia;
     string nombre, apellido, puesto, numIdentificacion, estadoCivil, fechaNacimiento;
     char sexo;
 
-    bool candidatoValido = false;
+    bool EmpleadoValido = false;
     int i = 0;
 
-    while (!candidatoValido) {
+    while (!EmpleadoValido) {
 		bool encontrado = false;
-        //Buscar el partido perteneciente de la lista de partidos y guardarla en el objeto partido
+        //Buscar el Sucursal perteneciente de la lista de sucursales y guardarla en el objeto Sucursal
 
-        cout << "De los siguientes partidos constituidos ,ï¿½ cual de ellos pertenece el candidato ?" << endl;
-        opcionLista.mostrarPartidos(partidos);
-        OpcionPartido = leerEntrada(0,partidos->getTam()-1);
+        cout << "De los siguientes sucursales constituidos ,ï¿½ cual de ellos pertenece el Empleado ?" << endl;
+        opcionLista.mostrarsucursales(sucursales);
+        OpcionSucursal = leerEntrada(0,sucursales->getTam()-1);
 
         // Buscar la ciudad de nacimiento y residencia de la lista de ciudades y guardarla en los objetos propios
+        
+        cout << "Ingrese el pais de nacimiento del empleado: ";		
+	    getline(cin, paisNacimiento);
 
-        cout << "De las siguientes ciudades, ï¿½Cual de ella naciï¿½ el candidato?" << endl;
+        cout << "De las siguientes ciudades, ï¿½Cual de ella nacioel Empleado?" << endl;
         opcionLista.mostrarCiudades(ciudades);
         OpcionNacimiento = leerEntrada(0,ciudades->getTam()-1);
 
-        cout << "De las siguientes ciudades, ï¿½Cual de ellas reside el candidato?" << endl;
+        cout << "De las siguientes ciudades, ï¿½Cual de ellas reside el Empleado?" << endl;
         opcionLista.mostrarCiudades(ciudades);
         OpcionResidencia = leerEntrada(0,ciudades->getTam()-1);
+        
+        cout << "Ingrese el nombre del Barrio de residencia del empleado: ";		
+	    getline(cin, barrioResidencia);
+	    
+	    cout << "Ingrese la direccion de residencia del empleado: ";		
+	    getline(cin, direccionResidencia);
 
-        // Aï¿½adir los demï¿½s datos del candidato
+        // Aï¿½adir los demï¿½s datos del Empleado
 
-        cout << "Ingrese el nombre de candidato" << endl;
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        getline(std::cin, nombre);
+        cout << "Ingrese el nombre de Empleado" << endl;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, nombre);
 
-        cout << "Ingrese el apellido del candidato" << endl;
-        getline(std::cin, apellido);
+        cout << "Ingrese el apellido del Empleado" << endl;
+        getline(cin, apellido);
 
-        cout << "ingrese el puesto al que el candidato quiere postularse 1.Alcaldia - 2.Concejo " << endl;
-        int opcion = leerEntrada(1,2);
-        puesto = (opcion==1)?"Alcaldia":"Concejo";
-
-        if(puesto == "Alcaldia")
-            for(int i = 0; i < candidatos->getTam(); i++)
-                if(candidatos->buscar(i).getCiudadResidencia().getNombre() == ciudades->buscar(OpcionResidencia).getNombre() &&
-                    candidatos->buscar(i).getPartido().getNombre() == partidos->buscar(OpcionPartido).getNombre()
-                )
-                {
-                    cout << "Ya existe un candadto a la alcaldia para esa ciudad y partido" << endl;
-                    cout << "1. Postular a Concejo - 2. calcelar insercion" << endl;
-                    int existe = leerEntrada(1,2);
-                    if(existe == 1)
-                    {
-                        puesto = "Concejo";
-                        break;
-                    }
-                    else
-                        return Candidato();
-                }
-
-
-
-        cout << "Ingrese el documento de identidad del candidato" << endl;
+        cout << "Ingrese el tipo de identificacion que el Empleado posee 1.Cedula de Ciudadania - 2.Cedula de Extranjeria - 3.Tarjeta de Identidad " << endl;
+        int opcion = leerEntrada(1,3);
+        if(opcion == 1){
+            tipoIdentificacion = "Cedula de Ciudadania";
+        } else if (opcion == 2) {
+            tipoIdentificacion = "Cedula de Extranjeria";
+        } else if (opcion == 3) {
+            tipoIdentificacion = "Tarjeta de Identidad";
+        }
+        
+        
+        cout << "Ingrese el documento de identidad del Empleado" << endl;
         numIdentificacion = to_string(leerEntrada(0, 9999999999));
+        
+        cout << "Ingrese el telefono fijo  del Empleado" << endl;
+        telefonoFijo = to_string(leerEntrada(0, 9999999999));
+        
+        cout << "Ingrese el telefono celular  del Empleado" << endl;
+        telefonoCelular = to_string(leerEntrada(0, 9999999999));
+        
+        cout << "Ingrese el email del empleado: ";		
+	    getline(cin, email);
 
-        cout << "ingrese el estado civil del candidato 1.Casado 2.Soltero 3.Union libre 4.Divorciado" << endl;
-        opcion = leerEntrada(1,4);
-        if(opcion == 1)
-        {
-            estadoCivil = "Casado";
-        }
-        else if (opcion == 2)
-        {
-            estadoCivil = "Soltero";
-        }
-        else if (opcion == 3)
-        {
-            estadoCivil = "Union libre";
-        }
-        else if (opcion == 4)
-        {
-            estadoCivil = "Divorciado";
-        }
 
-        cout << "Ingrese la fecha de nacimiento de candidato " << endl;
+        cout << "Ingrese la fecha de nacimiento de Empleado " << endl;
         cout << "Dia: " << endl;
         int dia = leerEntrada(1,31);
         cout << "Mes: " << endl;
@@ -165,7 +170,7 @@ Candidato Inicializar::inicializarCandidato(Lista < Partido > * partidos, Lista 
         string sanio = to_string(anio);
         fechaNacimiento = sdia+"/"+smes+"/"+sanio;
 
-        cout << "Ingrese el sexo del candidato 1.F 2.M " << endl;
+        cout << "Ingrese el sexo del Empleado 1.F 2.M " << endl;
         int genero = leerEntrada(1, 2);
         if (genero == 1) {
             sexo = 'F';
@@ -173,28 +178,28 @@ Candidato Inicializar::inicializarCandidato(Lista < Partido > * partidos, Lista 
             sexo = 'M';
         }
 
-        for (int i = 0; i < candidatos -> getTam(); i++) {
-            Candidato candidatoAuxiliar = candidatos -> buscar(i);
-            if (candidatoAuxiliar.getNumIdentificacion() == numIdentificacion) {
-                cout << "Ya hay un candidato con este numero de identificaciï¿½n" << endl;
+        for (int i = 0; i < empleados -> getTam(); i++) {
+            Empleado EmpleadoAuxiliar = empleados -> buscar(i);
+            if (EmpleadoAuxiliar.getNumIdentificacion() == numIdentificacion) {
+                cout << "Ya hay un Empleado con este numero de identificaciï¿½n" << endl;
                 encontrado = true;
                 break;
             }
         }
 
 	    if (!encontrado) {
-	        candidatoValido = true;
+	        EmpleadoValido = true;
 	    }
     }
 
-    //Creacion del objeto candidato para aï¿½adirlo en la lista
-    Partido partido = partidos -> buscar(OpcionPartido);
-    int votos = 0;
+    //Creacion del objeto Empleado para aï¿½adirlo en la lista
+    Sucursal sucursal = sucursales -> buscar(OpcionSucursal);
+    
 
     Ciudad ciudadNacimiento = ciudades -> buscar(OpcionNacimiento);
     Ciudad ciudadResidencia = ciudades -> buscar(OpcionResidencia);
 
-    Candidato candidato(nombre, apellido, puesto, numIdentificacion, sexo, estadoCivil, fechaNacimiento, ciudadNacimiento, ciudadResidencia, partido, votos);
+    Empleado empleado(nombre, apellido, puesto, numIdentificacion, sexo, estadoCivil, fechaNacimiento, ciudadNacimiento, ciudadResidencia, Sucursal);
 
-    return candidato;
+    return Empleado;
 }

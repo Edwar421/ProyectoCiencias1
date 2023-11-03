@@ -22,12 +22,12 @@ private:
     string telefonoFijo;
     string email;
     string fechaNacimiento;
-    Pais paisNacimiento;
+    string paisNacimiento;
     Ciudad ciudadNacimiento;
     Ciudad ciudadResidencia;
-    Ciudad direccionResidencia;
-    Ciudad barrioResidencia;
-    
+    string direccionResidencia;
+    string barrioResidencia;
+    string actividadLaboral;
     Sucursal sucursal;
     
 
@@ -41,13 +41,16 @@ public: Empleado() {
         telefonoFijo = "";
         email = "";
         fechaNacimiento = "";
-        actividadLaboral = 'A';
-        hijos = 'H';
+        paisNacimiento = "";
+        direccionResidencia = "";
+    	barrioResidencia = "";
+        actividadLaboral = "";
+        //hijos = 'H';
     }
 
     Empleado(string nombre, string apellido, string tipoIdentificacion, string numIdentificacion, char sexo, string telefonoCelular,
-			string telefonoFijo, string email, string fechaNacimiento, Pais paisNacimiento, Ciudad ciudadNacimiento, Ciudad ciudadResidencia, Ciudad direccionResidencia, 
-			Ciudad barrioResidencia, Sucursal sucursal) {
+			string telefonoFijo, string email, string fechaNacimiento, string paisNacimiento, Ciudad ciudadNacimiento, Ciudad ciudadResidencia, string direccionResidencia, 
+			string barrioResidencia, Sucursal sucursal) {
         this -> nombre = nombre;
         this -> apellido = apellido;
         this -> tipoIdentificacion = tipoIdentificacion;
@@ -97,7 +100,7 @@ public: Empleado() {
     string getFechaNacimiento() {
         return fechaNacimiento;
     }
-    Pais getPaisNacimiento() {
+    string getPaisNacimiento() {
         return paisNacimiento;
     }
     Ciudad getCiudadNacimiento() {
@@ -106,10 +109,10 @@ public: Empleado() {
     Ciudad getCiudadResidencia() {
         return ciudadResidencia;
     }
-    Ciudad getDireccionResidencia() {
+    string getDireccionResidencia() {
         return direccionResidencia;
     }
-    Ciudad getBarrioResidencia() {
+    string getBarrioResidencia() {
         return barrioResidencia;
     }
     Sucursal getSucursal(){
@@ -154,7 +157,7 @@ public: Empleado() {
         Empleado::fechaNacimiento = fechaNacimiento;
     }
     
-    void setPaisNacimiento(Pais paisNacimiento) {
+    void setPaisNacimiento(string paisNacimiento) {
         Empleado::paisNacimiento = paisNacimiento;
     }
 
@@ -166,11 +169,11 @@ public: Empleado() {
         Empleado::ciudadResidencia = ciudadResidencia;
     }
     
-    void setDireccionResidencia(Ciudad direccionResidencia) {
+    void setDireccionResidencia(string direccionResidencia) {
         Empleado::direccionResidencia = direccionResidencia;
     }
 
-    void setBarrioResidencia(Ciudad barrioResidencia) {
+    void setBarrioResidencia(string barrioResidencia) {
         Empleado::barrioResidencia = barrioResidencia;
     }
     void setSucursal(Sucursal sucursal) {
