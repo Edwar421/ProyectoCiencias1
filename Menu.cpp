@@ -90,23 +90,27 @@ void Simulacion::Menu() {
                     case 2: {
                         string ciudad;
                         ciudad = elegirCiudad();
-                        opcionConsultas.consulta4(ciudad);
+                        opcionConsultas.consulta2(ciudad);
                         break;
                     }
                     case 3: {
                         string ciudad;
                         ciudad = elegirCiudad();
-                        opcionConsultas.consulta5(ciudad);
+                        opcionConsultas.consulta3(ciudad);
                         break;
                     }
                     case 4: {
                         string ciudad;
                         ciudad = elegirCiudad();
-                        opcionConsultas.consulta6(ciudad);
+                        opcionConsultas.consulta4(ciudad);
                         break;
                     }
                     case 5: {
-                        opcionConsultas.consulta7( * ciudades);
+                        opcionConsultas.consulta5();
+                        break;
+                    }
+                    case 6: {
+                        opcionConsultas.consulta6();
                         break;
                     }
                 }
