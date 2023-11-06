@@ -5,45 +5,33 @@ using namespace std;
 #include "Clases Principales/Inicializar.cpp"
 
 class Menu {
-private: 
-
-	Lista < Ciudad > * ciudades;
-    Lista < Partido > * partidos;
-    Lista < Candidato > * candidatos;
-    Lista < Elecciones > * totalElecciones;
-
+private:
+    Lista<Ciudad> *ciudades;
+    Lista<Sucursal> *sucursales;
+    Lista<Empleado> *empleados;
     Inicializar inicializar;
-    OpcionesListas opcionLista; // Inicializa el objeto de la clase Opciones Listas
-public:
 
+public:
     int Opcion;
 
-    //Muestra de Menus
     void MostrarMenu();
     void SubMenuListas();
     void SubMenuConsultas();
     void SubMenuEstadisticas();
     void SubMenuInsercion();
-    void EleccionSubMenuInsercion();
-    string elegirPartido(); 
-    string elegirCiudad(); 
+    string elegirSucursal();
+    string elegirCiudad();
 
-    //Bloque de ejecuci�n
     void Menu();
 
-    //Leer Archivos e inicializar Listas
     void leerArchivos() {
-
         Archivos Ciudades("Ciudades");
-        Archivos Partidos("Partidos");
-        Archivos Candidatos("Candidatos");
+        Archivos Sucursal("sucursales");
+        Archivos Empleados("Empleados");
 
         ciudades = Ciudades.leerCiudades();
-        partidos = Partidos.leerPartidos();
-        candidatos = Candidatos.leerCandidatos();
-
-        totalElecciones = new Lista < Elecciones > ;
-
+        sucursales = Sucursal.leerSucursales();
+        empleados = Empleados.leerEmpleados();
     }
 };
 
@@ -52,9 +40,9 @@ void Simulacion::Menu() {
 
     leerArchivos();
 
-    OpcionesConsultas opcionConsultas(ciudades, partidos, candidatos); // Inicializa el objeto de la clase Opciones Consultas
-    OpcionesSimulacion opcionesSimulacion(ciudades, partidos, candidatos, totalElecciones);
-    OpcionesEstadisticas opcionesEstadisticas(ciudades, partidos, candidatos, totalElecciones);
+    OpcionesConsultas opcionConsultas(ciudades, sucursales, empleados); // Inicializa el objeto de la clase Opciones Consultas
+    OpcionesSimulacion opcionesSimulacion(ciudades, sucursales, empleados, totalElecciones);
+    OpcionesEstadisticas opcionesEstadisticas(ciudades, sucursales, empleados, totalElecciones);
 
     while (programa) { // Bucle infinito del programa
         system("cls");
@@ -73,42 +61,42 @@ void Simulacion::Menu() {
                         break;
                     }
                     case 2: {
-                        opcionLista.mostrarPartidos(partidos);
+                        opcionLista.mostrarsucursales(sucursales);
                         system("Pause"); // Pausa el programa y espera a que se presione una tecla
                         break;
                     }
                     case 3: {
                         string ciudad;
-                        cout << "Elige la ciudad que desees ver los candidatos al concejo" << endl;
+                        cout << "Elige la ciudad que desees ver los empleados al concejo" << endl;
                     	opcionLista.mostrarCiudades(ciudades);
                     	Opcion = leerEntrada(0,ciudades->getTam()-1);
-                        opcionLista.candidatosConcejo(ciudades->buscar(Opcion).getNombre(), candidatos);
+                        opcionLista.empleadosConcejo(ciudades->buscar(Opcion).getNombre(), empleados);
 
                         break;
                     }
                     case 4: {
                         string ciudad;
-                        cout << "Elige la ciudad que desees ver los candidatos a la alcaldia" << endl;
+                        cout << "Elige la ciudad que desees ver los empleados a la alcaldia" << endl;
                     	opcionLista.mostrarCiudades(ciudades);
                         Opcion = leerEntrada(0,ciudades->getTam()-1);
-                        opcionLista.candidatosAlcaldia(ciudades->buscar(Opcion).getNombre(), candidatos);
+                        opcionLista.empleadosAlcaldia(ciudades->buscar(Opcion).getNombre(), empleados);
                         break;
                     }
                     case 5: {
-                        opcionLista.candidatosAlcaldiaConsejoPartido("Alcaldia", candidatos, partidos);
+                        opcionLista.empleadosAlcaldiaConsejoPartido("Alcaldia", empleados, sucursales);
                         break;
                     }
                     case 6: {
-                        opcionLista.candidatosAlcaldiaConsejoPartido("Concejo", candidatos, partidos);
+                        opcionLista.empleadosAlcaldiaConsejoPartido("Concejo", empleados, sucursales);
 
                         break;
                     }
                     case 7: {
-                        opcionLista.candidatosAlcaldiaConsejoPartidoLista("Concejo", candidatos, partidos);
+                        opcionLista.empleadosAlcaldiaConsejoPartidoLista("Concejo", empleados, sucursales);
                         break;
                     }
                     case 8: {
-                        opcionLista.candidatosAlcaldiaConsejoPartidoLista("Alcaldia", candidatos, partidos);
+                        opcionLista.empleadosAlcaldiaConsejoPartidoLista("Alcaldia", empleados, sucursales);
                         break;
                     }
                 }
@@ -226,20 +214,20 @@ void Simulacion::Menu() {
                         switch (Opcion) {
                             case 1: {
                                 //Creaci�n del Objeto partido
-                                Partido NuevoPartido = inicializar.inicializarPartido(partidos);
-                                //Inserci�n en la lista de partidos
-                                partidos -> insertar(NuevoPartido);
+                                Partido NuevoPartido = inicializar.inicializarPartido(sucursales);
+                                //Inserci�n en la lista de sucursales
+                                sucursales -> insertar(NuevoPartido);
 
                                 Opcion = 0;
                                 break;
                             }
-                            case 2: { // Insertar Candidato (Se necesita validaci�n de puesto, fecha nacimiento, estado civil)
+                            case 2: { // Insertar Empleado (Se necesita validaci�n de puesto, fecha nacimiento, estado civil)
 
-                                //Creacion del objeto candidato para a�adirlo en la lista
-                                Candidato nuevoCandidato = inicializar.inicializarCandidato(partidos, ciudades, candidatos);
-                                //Inserci�n en la lista de candidatos
-                                if(!(nuevoCandidato.getNombre() == ""))
-                                    candidatos -> insertar(nuevoCandidato);
+                                //Creacion del objeto Empleado para a�adirlo en la lista
+                                Empleado nuevoEmpleado = inicializar.inicializarEmpleado(sucursales, ciudades, empleados);
+                                //Inserci�n en la lista de empleados
+                                if(!(nuevoEmpleado.getNombre() == ""))
+                                    empleados -> insertar(nuevoEmpleado);
                                 break;
                             }
                             case 3: {
@@ -261,43 +249,43 @@ void Simulacion::Menu() {
                                 //Encontrar el partido a modificar
                                 string NombrePartido, RepresentanteLegal;
                                 cout << "�Que partido deseas modificar?" << endl;
-                                opcionLista.mostrarPartidos(partidos);
-                                Opcion = leerEntrada(0,partidos->getTam()-1);
+                                opcionLista.mostrarsucursales(sucursales);
+                                Opcion = leerEntrada(0,sucursales->getTam()-1);
 
-                                string auxNombrePartido = partidos->buscar(Opcion).getNombre();
+                                string auxNombrePartido = sucursales->buscar(Opcion).getNombre();
 
                                 //Inicializar Partido
-                                Partido NuevoPartido = inicializar.inicializarPartido(partidos);
+                                Partido NuevoPartido = inicializar.inicializarPartido(sucursales);
 
-                                partidos -> modificar(NuevoPartido, Opcion);
+                                sucursales -> modificar(NuevoPartido, Opcion);
 
-                                for(int i = 0; i < candidatos->getTam(); i++)
+                                for(int i = 0; i < empleados->getTam(); i++)
                                 {
-                                    Candidato auxCandidato = candidatos->buscar(i);
-                                    if(auxCandidato.getPartido().getNombre() == auxNombrePartido)
+                                    Empleado auxEmpleado = empleados->buscar(i);
+                                    if(auxEmpleado.getPartido().getNombre() == auxNombrePartido)
                                     {
-                                        auxCandidato.setPartido(NuevoPartido);
-                                        candidatos->modificar(auxCandidato,i);
+                                        auxEmpleado.setPartido(NuevoPartido);
+                                        empleados->modificar(auxEmpleado,i);
                                     }
 
                                 }
 
                                 break;
                             }
-                            case 2: { //Modificar Candidato
+                            case 2: { //Modificar Empleado
 
-                                // Encontrar el candidato a modificar
+                                // Encontrar el Empleado a modificar
                                 int Opcion;
 
-                                cout << "Selecciona el candidato que deseas modificar" << endl;
-                                opcionLista.mostrarCandidatos(candidatos);
-                                Opcion = leerEntrada(0,candidatos->getTam()-1);
+                                cout << "Selecciona el Empleado que deseas modificar" << endl;
+                                opcionLista.mostrarempleados(empleados);
+                                Opcion = leerEntrada(0,empleados->getTam()-1);
 
-                                // Creaci�n del objeto candidato para a�adirlo en la lista
-                                Candidato nuevoCandidato = inicializar.inicializarCandidato(partidos, ciudades, candidatos);
+                                // Creaci�n del objeto Empleado para a�adirlo en la lista
+                                Empleado nuevoEmpleado = inicializar.inicializarEmpleado(sucursales, ciudades, empleados);
 
-                                // Inserci�n en la lista de candidatos
-                                candidatos -> modificar(nuevoCandidato, Opcion);
+                                // Inserci�n en la lista de empleados
+                                empleados -> modificar(nuevoEmpleado, Opcion);
                                 break;
                             }
                             case 3: { //Modificar Ciudad
@@ -316,18 +304,18 @@ void Simulacion::Menu() {
                                 //Insercion en la lista de ciudades
                                 ciudades -> modificar(NuevaCiudad, ciudad);
 
-                                for(int i = 0; i < candidatos->getTam(); i++)
+                                for(int i = 0; i < empleados->getTam(); i++)
                                 {
-                                    Candidato auxCandidato = candidatos->buscar(i);
-                                    if(auxCandidato.getCiudadNacimiento().getNombre() == auxNombreCiudad)
+                                    Empleado auxEmpleado = empleados->buscar(i);
+                                    if(auxEmpleado.getCiudadNacimiento().getNombre() == auxNombreCiudad)
                                     {
-                                        auxCandidato.setCiudadNacimiento(NuevaCiudad);
-                                        candidatos->modificar(auxCandidato,i);
+                                        auxEmpleado.setCiudadNacimiento(NuevaCiudad);
+                                        empleados->modificar(auxEmpleado,i);
                                     }
-                                    if(auxCandidato.getCiudadResidencia().getNombre() == auxNombreCiudad)
+                                    if(auxEmpleado.getCiudadResidencia().getNombre() == auxNombreCiudad)
                                     {
-                                        auxCandidato.setCiudadResidencia(NuevaCiudad);
-                                        candidatos->modificar(auxCandidato,i);
+                                        auxEmpleado.setCiudadResidencia(NuevaCiudad);
+                                        empleados->modificar(auxEmpleado,i);
                                     }
 
                                 }
@@ -336,33 +324,33 @@ void Simulacion::Menu() {
                         }
                         break;
                     }
-                    case 3: { //Opciones para Eliminar //Validaci�n, Si se eliminan partido, los Candidatos con ese partido quedan sin partido
+                    case 3: { //Opciones para Eliminar //Validaci�n, Si se eliminan partido, los empleados con ese partido quedan sin partido
                         EleccionSubMenuInsercion();
                         Opcion = leerEntrada(1,3);
                         switch (Opcion) {
                             case 1: { //Eliminar Partido
                                 int Eleccion;
                                 cout << "�Que partido deseas Eliminar?" << endl;
-                                opcionLista.mostrarPartidos(partidos);
-                                Eleccion = leerEntrada(0,partidos->getTam()-1);
-                                //Guardar un partido auxiliar para eliminar los candidatos con ese partido
-								Partido partidoAux = partidos->buscar(Eleccion);
+                                opcionLista.mostrarsucursales(sucursales);
+                                Eleccion = leerEntrada(0,sucursales->getTam()-1);
+                                //Guardar un partido auxiliar para eliminar los empleados con ese partido
+								Partido partidoAux = sucursales->buscar(Eleccion);
 								
-                                partidos -> borrar(Eleccion);
+                                sucursales -> borrar(Eleccion);
                                 
-                                for(int i = 0; i < candidatos->getTam(); i++){
-                                	Candidato candidatoAux = candidatos->buscar(i);
-                                    string aux1 = candidatoAux.getPartido().getNombre();
+                                for(int i = 0; i < empleados->getTam(); i++){
+                                	Empleado EmpleadoAux = empleados->buscar(i);
+                                    string aux1 = EmpleadoAux.getPartido().getNombre();
                                     string aux2 = partidoAux.getNombre();
 
-                                	if(candidatoAux.getPartido().getNombre() == partidoAux.getNombre()){
-                                		candidatos->borrar(i);
+                                	if(EmpleadoAux.getPartido().getNombre() == partidoAux.getNombre()){
+                                		empleados->borrar(i);
 									}
-                                    candidatoAux = candidatos->buscar(i);
-                                    while(candidatoAux.getPartido().getNombre() == partidoAux.getNombre())
+                                    EmpleadoAux = empleados->buscar(i);
+                                    while(EmpleadoAux.getPartido().getNombre() == partidoAux.getNombre())
                                     {
-                                        candidatos->borrar(i);
-                                        candidatoAux = candidatos->buscar(i);
+                                        empleados->borrar(i);
+                                        EmpleadoAux = empleados->buscar(i);
                                     }
 								}
 
@@ -370,13 +358,13 @@ void Simulacion::Menu() {
 								
                                 break;
                             }
-                            case 2: { //Eliminar Candidato
+                            case 2: { //Eliminar Empleado
 
-                                cout << "�Que candidato deseas Eliminar?" << endl;
-                                opcionLista.mostrarCandidatos(candidatos);
-                                Opcion = leerEntrada(0,candidatos->getTam()-1);
+                                cout << "�Que Empleado deseas Eliminar?" << endl;
+                                opcionLista.mostrarempleados(empleados);
+                                Opcion = leerEntrada(0,empleados->getTam()-1);
 
-                                candidatos -> borrar(Opcion);
+                                empleados -> borrar(Opcion);
 
                                 break;
                             }
@@ -390,18 +378,18 @@ void Simulacion::Menu() {
 								
                                 ciudades -> borrar(Opcion);
                                 
-                                //Borrar los candidatos que residan en esa ciudad
+                                //Borrar los empleados que residan en esa ciudad
                                 
-                                for(int i = 0; i < candidatos->getTam(); i++){
-                                	Candidato candidatoAux = candidatos->buscar(i);
-                                	if(candidatoAux.getCiudadResidencia().getNombre() == ciudadAux.getNombre()){
-                                		candidatos->borrar(i);
+                                for(int i = 0; i < empleados->getTam(); i++){
+                                	Empleado EmpleadoAux = empleados->buscar(i);
+                                	if(EmpleadoAux.getCiudadResidencia().getNombre() == ciudadAux.getNombre()){
+                                		empleados->borrar(i);
 									}
-                                    candidatoAux = candidatos->buscar(i);
-                                    while(candidatoAux.getCiudadResidencia().getNombre() == ciudadAux.getNombre())
+                                    EmpleadoAux = empleados->buscar(i);
+                                    while(EmpleadoAux.getCiudadResidencia().getNombre() == ciudadAux.getNombre())
                                     {
-                                        candidatos->borrar(i);
-                                        candidatoAux = candidatos->buscar(i);
+                                        empleados->borrar(i);
+                                        EmpleadoAux = empleados->buscar(i);
                                     }
 
 								}
@@ -413,23 +401,23 @@ void Simulacion::Menu() {
                     }
                 }
                 Opcion = 0;
-                opcionConsultas.actualizar(ciudades, partidos, candidatos);
+                opcionConsultas.actualizar(ciudades, sucursales, empleados);
                 break;
             }
             case 6: {
                 system("cls");
                 //FINALIZAR Y GUARDAR EN LOS ARCHIVOS PLANOS
 
-                //Escribir en el archivo plano los partidos de la lista
-                Archivos Partidos("Partidos");
-                string textoPartidos;
+                //Escribir en el archivo plano los sucursales de la lista
+                Archivos sucursales("sucursales");
+                string textosucursales;
 
-                for (int i = 0; i < partidos -> getTam(); i++) {
-                    Partido partido = partidos -> buscar(i); // Declaraci�n del partido de la lista para a�adir su informaci�n al texto plano
-                    textoPartidos += partido.getNombre() + "," + partido.getRepresentanteLegal() + "\n";
+                for (int i = 0; i < sucursales -> getTam(); i++) {
+                    Partido partido = sucursales -> buscar(i); // Declaraci�n del partido de la lista para a�adir su informaci�n al texto plano
+                    textosucursales += partido.getNombre() + "," + partido.getRepresentanteLegal() + "\n";
                 }
 
-                Partidos.escribir(textoPartidos);
+                sucursales.escribir(textosucursales);
 
                 //Escribir en el archivo plano las ciudades de la lista
 
@@ -443,17 +431,17 @@ void Simulacion::Menu() {
 
                 Ciudades.escribir(textoCiudades);
 
-                //Escribir en el archivo plano los candidatos de la lista
+                //Escribir en el archivo plano los empleados de la lista
 
-                Archivos Candidatos("Candidatos");
-                string textoCandidatos;
+                Archivos empleados("empleados");
+                string textoempleados;
 
-                for (int i = 0; i < candidatos -> getTam(); i++) {
-                    Candidato candidato = candidatos -> buscar(i);
-                    textoCandidatos += candidato.getNombre() + "," + candidato.getApellido() + "," + candidato.getPuesto() + "," + candidato.getNumIdentificacion() + "," + candidato.getSexo() + "," + candidato.getEstadoCivil() + "," + candidato.getFechaNacimiento() + "," + candidato.getCiudadNacimiento().getNombre() + "," + candidato.getCiudadResidencia().getNombre() + "," + candidato.getPartido().getNombre()+",0\n";
+                for (int i = 0; i < empleados -> getTam(); i++) {
+                    Empleado Empleado = empleados -> buscar(i);
+                    textoempleados += Empleado.getNombre() + "," + Empleado.getApellido() + "," + Empleado.getPuesto() + "," + Empleado.getNumIdentificacion() + "," + Empleado.getSexo() + "," + Empleado.getEstadoCivil() + "," + Empleado.getFechaNacimiento() + "," + Empleado.getCiudadNacimiento().getNombre() + "," + Empleado.getCiudadResidencia().getNombre() + "," + Empleado.getPartido().getNombre()+",0\n";
                 }
                 
-                Candidatos.escribir(textoCandidatos);
+                empleados.escribir(textoempleados);
 
                 programa = false;
                 break;
@@ -476,24 +464,24 @@ void Simulacion::MostrarMenu() {
 void Simulacion::SubMenuListas() {
     cout << "Buscar Listas por categoria" << endl;
     cout << "1. Ciudades para las cuales se realizar� el proceso electoral." << endl;
-    cout << "2. Partidos legalmente reconocidos." << endl;
-    cout << "3. Todos los candidatos al concejo de una ciudad." << endl;
-    cout << "4. Todos los candidatos a la alcald�a de una ciudad." << endl;
-    cout << "5. Candidatos a cada una de las alcald�as, por partido." << endl;
-    cout << "6. Candidatos a cada uno de los concejos, por partido." << endl;
-    cout << "7. Por cada partido, la lista de candidatos a los concejos." << endl;
-    cout << "8. Por cada partido, la lista de candidatos a las alcald�as." << endl;
+    cout << "2. sucursales legalmente reconocidos." << endl;
+    cout << "3. Todos los empleados al concejo de una ciudad." << endl;
+    cout << "4. Todos los empleados a la alcald�a de una ciudad." << endl;
+    cout << "5. empleados a cada una de las alcald�as, por partido." << endl;
+    cout << "6. empleados a cada uno de los concejos, por partido." << endl;
+    cout << "7. Por cada partido, la lista de empleados a los concejos." << endl;
+    cout << "8. Por cada partido, la lista de empleados a las alcald�as." << endl;
 
 }
 
 void Simulacion::SubMenuConsultas() {
     cout << "Realizar una consulta" << endl;
-    cout << "1. Dado un partido y una ciudad, mostrar la lista de sus candidatos al Concejo y el candidato a la alcald�a." << endl;
-    cout << "2. Dado un partido mostrar la lista de candidatos a alcald�as de cada una de las diferentes ciudades." << endl;
-    cout << "3. Dado un partido mostrar las listas de candidatos a cada uno de los diferentes concejos." << endl;
-    cout << "4. Dada una ciudad, mostrar por cada partido, el candidato a la alcald�a y los candidatos al concejo" << endl;
-    cout << "5. Dada una ciudad, mostrar el tarjet�n de candidatos a la alcald�a." << endl;
-    cout << "6. Dada una ciudad, mostrar el tarjet�n de candidatos al concejo." << endl;
+    cout << "1. Dado un partido y una ciudad, mostrar la lista de sus empleados al Concejo y el Empleado a la alcald�a." << endl;
+    cout << "2. Dado un partido mostrar la lista de empleados a alcald�as de cada una de las diferentes ciudades." << endl;
+    cout << "3. Dado un partido mostrar las listas de empleados a cada uno de los diferentes concejos." << endl;
+    cout << "4. Dada una ciudad, mostrar por cada partido, el Empleado a la alcald�a y los empleados al concejo" << endl;
+    cout << "5. Dada una ciudad, mostrar el tarjet�n de empleados a la alcald�a." << endl;
+    cout << "6. Dada una ciudad, mostrar el tarjet�n de empleados al concejo." << endl;
     cout << "7. Censo electoral. Por cada ciudad, mostrar la cantidad de personas habilitadas para votar." << endl;
 }
 
@@ -512,7 +500,7 @@ void Simulacion::SubMenuInsercion() {
 
 void Simulacion::EleccionSubMenuInsercion() {
     cout << "1. Partido" << endl;
-    cout << "2. Candidato" << endl;
+    cout << "2. Empleado" << endl;
     cout << "3. Ciudad" << endl;
 }
 
@@ -520,9 +508,9 @@ string Simulacion::elegirPartido()
 {
     int pos = 0;
     cout << "Escriba el número del partido que desea elegir: " << endl;
-    opcionLista.mostrarPartidos(partidos);
-    pos = leerEntrada(0,partidos->getTam()-1);
-    return partidos->buscar(pos).getNombre();
+    opcionLista.mostrarsucursales(sucursales);
+    pos = leerEntrada(0,sucursales->getTam()-1);
+    return sucursales->buscar(pos).getNombre();
 }
 
 string Simulacion::elegirCiudad()
