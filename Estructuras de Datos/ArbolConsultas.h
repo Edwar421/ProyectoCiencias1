@@ -7,7 +7,7 @@
 
 #include "Queue.h"
 
-#include "../Clases Principales/Empleado.h"
+#include "../ClasesPrincipales/Empleado.h"
 
 using namespace std;
 
