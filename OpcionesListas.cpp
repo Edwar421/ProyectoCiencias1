@@ -37,8 +37,8 @@ public:
         int cantidad = 0;
         for (int i = 0; i < candidatos -> getTam(); i++) {
             //Guardar el candidato buscado y devolver los atributos necesarios dada la validacion
-            Candidato candidato = candidatos -> buscar(i);
-            if (candidato.getCiudadResidencia().getNombre() == ciudad && candidato.getPuesto() == "Concejo") {
+            Empleado empleado = empleados -> buscar(i);
+            if (empleado.getCiudadResidencia().getNombre() == ciudad && empleado.getPuesto() == "Concejo") {
                 cout << candidato.getNombre() << endl;
                 cantidad++;
             }
@@ -53,13 +53,13 @@ public:
 
     //4. Todos los candidatos a la alcald�a de una ciudad.
 
-    void candidatosAlcaldia(string ciudad, Lista < Candidato > * candidatos) {
+    void candidatosAlcaldia(string ciudad, Lista < Empleado > * empleados) {
         int cantidad = 0;
-        for (int i = 0; i < candidatos -> getTam(); i++) {
+        for (int i = 0; i < empleados -> getTam(); i++) {
             //Guardar el candidato buscado y devolver los atributos necesarios dada la validacion
-            Candidato candidato = candidatos -> buscar(i);
-            if (candidato.getCiudadResidencia().getNombre() == ciudad && candidato.getPuesto() == "Alcaldia") {
-                cout << candidatos -> buscar(i).getNombre() << endl;
+            Empleado empleado = empleados -> buscar(i);
+            if (empleado.getCiudadResidencia().getNombreCiudad() == ciudad && empleado.getPuesto() == "Alcaldia") {
+                cout << empleados -> buscar(i).getNombre() << endl;
                 cantidad++;
             }
         }
