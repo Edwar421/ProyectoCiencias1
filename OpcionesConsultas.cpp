@@ -5,7 +5,7 @@
 
 #include "Estructuras de Datos/ArbolConsultas.h"
 
-#include "Clases Principales/Empleado.h"
+#include "ClasesPrincipales/Empleado.h"
 
 #include "Estructuras de Datos/ArbolRojiNegro.h"
 
@@ -25,7 +25,7 @@ public:
     int calcularEdad(Empleado *auxEmpleado);
     void actualizar(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados);
     void agregarDatosArbolCiudades(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados);
-    void agregarDatosArbolPartidos(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados);
+    void agregarDatosArbolSucursales(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados);
 
     void consulta1(string partido, string ciudad);
     void consulta2(string partido);

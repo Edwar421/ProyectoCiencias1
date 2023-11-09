@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-#include "Clases Principales/Inicializar.cpp"
+#include "ClasesPrincipales/Inicializar.cpp"
 
 class Menu {
 private:
@@ -26,7 +26,7 @@ public:
 
     void leerArchivos() {
         Archivos Ciudades("Ciudades");
-        Archivos Sucursal("sucursales");
+        Archivos Sucursal("Sucursales");
         Archivos Empleados("Empleados");
 
         ciudades = Ciudades.leerCiudades();

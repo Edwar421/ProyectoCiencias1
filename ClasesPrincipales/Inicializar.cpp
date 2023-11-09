@@ -4,10 +4,6 @@
 
 #include "../OpcionesConsultas.cpp"
 
-#include "../OpcionesSimulacion.cpp"
-
-#include "../OpcionesEstadisticas.cpp"
-
 using namespace std;
 
 class Inicializar {
@@ -93,7 +89,7 @@ Empleado Inicializar::inicializarEmpleado(Lista < Sucursal > * sucursales, Lista
 
     int OpcionSucursal, OpcionNacimiento, OpcionResidencia;
     string nombre, apellido, tipoIdentificacion, numIdentificacion, telefonoCelular, telefonoFijo, email, fechaNacimiento, paisNacimiento, direccionResidencia, 
-			barrioResidencia, sucursal;
+			barrioResidencia, actividadLaboral, sucursal;
     char sexo;
 
     bool EmpleadoValido = false;
@@ -135,15 +131,15 @@ Empleado Inicializar::inicializarEmpleado(Lista < Sucursal > * sucursales, Lista
         cout << "Ingrese el apellido del Empleado" << endl;
         getline(cin, apellido);
 
-        cout << "Ingrese el tipo de identificacion que el Empleado posee 1.Cedula de Ciudadania - 2.Cedula de Extranjeria - 3.Tarjeta de Identidad " << endl;
+        cout << "Ingrese el tipo de identificacion que el Empleado posee 1.Cedula de Ciudadania - 2.Cedula de Extranjeria " << endl;
         int opcion = leerEntrada(1,3);
         if(opcion == 1){
             tipoIdentificacion = "Cedula de Ciudadania";
         } else if (opcion == 2) {
             tipoIdentificacion = "Cedula de Extranjeria";
-        } else if (opcion == 3) {
+        } /*else if (opcion == 3) {
             tipoIdentificacion = "Tarjeta de Identidad";
-        }
+        }*/
         
         
         cout << "Ingrese el documento de identidad del Empleado" << endl;
@@ -157,6 +153,10 @@ Empleado Inicializar::inicializarEmpleado(Lista < Sucursal > * sucursales, Lista
         
         cout << "Ingrese el email del empleado: ";		
 	    getline(cin, email);
+	    
+	    
+	    cout << "Ingrese la Actividad Laboral del Empleado: ";		
+	    getline(cin, actividadLaboral);
 
 
         cout << "Ingrese la fecha de nacimiento de Empleado " << endl;
@@ -202,7 +202,7 @@ Empleado Inicializar::inicializarEmpleado(Lista < Sucursal > * sucursales, Lista
 
     Empleado empleado(nombre, apellido, tipoIdentificacion, numIdentificacion, sexo, telefonoCelular,
 			telefonoFijo, email, fechaNacimiento, paisNacimiento, ciudadNacimiento, ciudadResidencia, direccionResidencia, 
-			barrioResidencia, sucursal);
+			barrioResidencia, actividadLaboral, sucursal);
 
     return Empleado;
 }

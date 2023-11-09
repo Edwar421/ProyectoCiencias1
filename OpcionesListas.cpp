@@ -14,26 +14,26 @@ public:
     }
 
     //2. Partidos legalmente reconocidos.
-    void mostrarPartidos(Lista < Partido > * partidos) {
+    void mostrarSucursales(Lista < Sucursal > * sucursales) {
         for (int i = 0; i < partidos -> getTam(); i++) {
             //Guardar el partido buscado y devolver el atributo nombre y representante Legal
-            Partido partido = partidos -> buscar(i);
-            cout << i << ". " << partido.getNombre() << " /--/ Representante Legal = " << partido.getRepresentanteLegal() << endl;
+            Sucursal sucursal = sucursales -> buscar(i);
+            cout << i << ". " << sucursal.getNombreSucursal() << " /--/ Gerente = " << partido.getGerenteSucursal() << endl;
         }
     }
 
-    void mostrarCandidatos(Lista < Candidato > * candidatos) {
-        for (int i = 0; i < candidatos -> getTam(); i++) {
+    void mostrarEmpleados(Lista < Empleado > * empleados) {
+        for (int i = 0; i < empleados -> getTam(); i++) {
             //Guardar el candidato y devolver sus atributos
-            Candidato candidato = candidatos -> buscar(i);
-            cout << i << ". " << candidato.getNombre() << " " << candidato.getApellido() << " " << candidato.getNumIdentificacion() << " " << candidato.getPuesto() << " " << candidato.getPartido().getNombre() << "/n" << endl;
+            Empelado empleado = empleados -> buscar(i);
+            cout << i << ". " << candidato.getNombre() << " " << candidato.getApellido() << " " << candidato.getTipoIdentificacion() << " " << candidato.NumIdentificacion() << " " << candidato.getSucursal().getNombreSucursal() << "/n" << endl;
         }
         system("Pause");
     }
 
     //3. Todos los candidatos al concejo de una ciudad.
 
-    void candidatosConcejo(string ciudad, Lista < Candidato > * candidatos) {
+    void candidatosConcejo(string ciudad, Lista < Empleado > * empleados) {
         int cantidad = 0;
         for (int i = 0; i < candidatos -> getTam(); i++) {
             //Guardar el candidato buscado y devolver los atributos necesarios dada la validacion
