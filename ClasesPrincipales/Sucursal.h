@@ -1,7 +1,7 @@
 #ifndef SUCURSAL_H
 #define SUCURSAL_H
 
-#inclide "Ciudad.h"
+#include "Ciudad.h"
 
 #include <string>
 using namespace std;
@@ -26,7 +26,7 @@ class Sucursal {
             this->gerenteSucursal = gerenteSucursal;
         }
 
-        // Mï¿½todos getter para acceder a los atributos
+        // Métodos getter para acceder a los atributos
         string getNombreSucursal() { 
 			return nombreSucursal; 
 		}
@@ -50,7 +50,7 @@ class Sucursal {
         // Mï¿½todo toString para la clase Partido
 	    string toString() {
 	        string datos;
-	        datos = getnombreSucursal()+ "," + getgerenteSucursal();
+	        datos = getNombreSucursal()+ "," + getGerenteSucursal();
 	        return datos;
 	    }
 

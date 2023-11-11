@@ -7,8 +7,6 @@
 
 #include "Sucursal.h"
 
-#inlude "Pais.h"
-
 using namespace std;
 
 class Empleado {
@@ -50,7 +48,7 @@ public: Empleado() {
 
     Empleado(string nombre, string apellido, string tipoIdentificacion, string numIdentificacion, char sexo, string telefonoCelular,
 			string telefonoFijo, string email, string fechaNacimiento, string paisNacimiento, Ciudad ciudadNacimiento, Ciudad ciudadResidencia, string direccionResidencia, 
-			string barrioResidencia, Sucursal sucursal) {
+			string barrioResidencia, string actividadLaboral, Sucursal sucursal) {
         this -> nombre = nombre;
         this -> apellido = apellido;
         this -> tipoIdentificacion = tipoIdentificacion;
@@ -65,6 +63,7 @@ public: Empleado() {
         this -> ciudadResidencia = ciudadResidencia;
         this -> direccionResidencia = direccionResidencia;
         this -> barrioResidencia = barrioResidencia;
+        this -> actividadLaboral = actividadLaboral;
         this -> sucursal = sucursal;
         
     }
@@ -115,6 +114,9 @@ public: Empleado() {
     string getBarrioResidencia() {
         return barrioResidencia;
     }
+    string getActividadLaboral() {
+        return actividadLaboral;
+    }
     Sucursal getSucursal(){
     	return sucursal;
 	}
@@ -146,7 +148,7 @@ public: Empleado() {
     }
     
     void setTelefonoFijo(string telefonoFijo) {
-        Empleado::telefonoFijo = telefonofijo;
+        Empleado::telefonoFijo = telefonoFijo;
     }
     
     void setEmail(string email) {
@@ -175,6 +177,9 @@ public: Empleado() {
 
     void setBarrioResidencia(string barrioResidencia) {
         Empleado::barrioResidencia = barrioResidencia;
+    }
+    void setActividadLaboral(string actividadLaboral) {
+        Empleado::actividadLaboral = actividadLaboral;
     }
     void setSucursal(Sucursal sucursal) {
         Empleado::sucursal = sucursal;

@@ -4,41 +4,63 @@ class OpcionesListas {
 private:
 
 public:
-    //1. Ciudades para las cuales se realizarï¿½ el proceso electoral.
+    //1. Ciudades en las que hay registradas sucursales.
     void mostrarCiudades(Lista < Ciudad > * ciudades) {
         for (int i = 0; i < ciudades -> getTam(); i++) {
             //Guardar la ciudad buscada en una variable y devolver atributo nombre
             Ciudad ciudad = ciudades -> buscar(i);
-            cout << i << ". " << ciudad.getNombre() << endl;
+            cout << i << ". " << ciudad.getNombreCiudad() << endl;
         }
     }
 
+<<<<<<< HEAD
+    //2. Sucursales.
+    void mostrarSucursales(Lista < Sucursal > * sucursales) {
+        for (int i = 0; i < sucursales -> getTam(); i++) {
+            //Guardar la sucursal buscada y devolver el atributo nombre
+            Sucursal sucursal = sucursales -> buscar(i);
+            cout << i << "." << "Nombre :"  << sucursal.getNombre() << "\n Barrio: " << sucursal.getBarrioSucursal() << "\n Dirección: " << sucursal.getDireccionSucursal() << "\n Gerente: " << sucursal.getGerenteSucursal();
+        }
+    }
+	//3. Empleados.
+    void mostrarEmpleados(Lista < Empleado > * empleados) {
+        for (int i = 0; i < empleados -> getTam(); i++) {
+            //Guardar el empleado y devolver sus atributos
+            Empleado empleado = empleados -> buscar(i);
+            cout << i << ". " << empleado.getNombre() << " " << empleado.getApellido() << " " << empleado.getNumIdentificacion() << " " << empleado.getSexo() << " " << empleado.getTelefonoCelular() << empleado.getTelefonoFijo() << empleado.getEmail() << empleado.getFechaNacimiento() << empleado.getCiudadNacimiento() << empleado.getPaisNacimiento() << empleado.getCiudadResidencia() << empleado.getDireccionResidencia() << empleado.getBarrioResidencia() << empleado.getSucursal() << "/n" << endl;
+=======
     //2. Partidos legalmente reconocidos.
-    void mostrarPartidos(Lista < Partido > * partidos) {
+    void mostrarSucursales(Lista < Sucursal > * sucursales) {
         for (int i = 0; i < partidos -> getTam(); i++) {
             //Guardar el partido buscado y devolver el atributo nombre y representante Legal
-            Partido partido = partidos -> buscar(i);
-            cout << i << ". " << partido.getNombre() << " /--/ Representante Legal = " << partido.getRepresentanteLegal() << endl;
+            Sucursal sucursal = sucursales -> buscar(i);
+            cout << i << ". " << sucursal.getNombreSucursal() << " /--/ Gerente = " << partido.getGerenteSucursal() << endl;
         }
     }
 
-    void mostrarCandidatos(Lista < Candidato > * candidatos) {
-        for (int i = 0; i < candidatos -> getTam(); i++) {
+    void mostrarEmpleados(Lista < Empleado > * empleados) {
+        for (int i = 0; i < empleados -> getTam(); i++) {
             //Guardar el candidato y devolver sus atributos
-            Candidato candidato = candidatos -> buscar(i);
-            cout << i << ". " << candidato.getNombre() << " " << candidato.getApellido() << " " << candidato.getNumIdentificacion() << " " << candidato.getPuesto() << " " << candidato.getPartido().getNombre() << "/n" << endl;
+            Empelado empleado = empleados -> buscar(i);
+            cout << i << ". " << candidato.getNombre() << " " << candidato.getApellido() << " " << candidato.getTipoIdentificacion() << " " << candidato.NumIdentificacion() << " " << candidato.getSucursal().getNombreSucursal() << "/n" << endl;
+<<<<<<< HEAD
+>>>>>>> abcc5b659a4a6ccef4106c323e6536850b6de452
+=======
+>>>>>>> abcc5b659a4a6ccef4106c323e6536850b6de452
         }
         system("Pause");
     }
 
+<<<<<<< HEAD
+=======
     //3. Todos los candidatos al concejo de una ciudad.
 
-    void candidatosConcejo(string ciudad, Lista < Candidato > * candidatos) {
+    void candidatosConcejo(string ciudad, Lista < Empleado > * empleados) {
         int cantidad = 0;
         for (int i = 0; i < candidatos -> getTam(); i++) {
             //Guardar el candidato buscado y devolver los atributos necesarios dada la validacion
-            Candidato candidato = candidatos -> buscar(i);
-            if (candidato.getCiudadResidencia().getNombre() == ciudad && candidato.getPuesto() == "Concejo") {
+            Empleado empleado = empleados -> buscar(i);
+            if (empleado.getCiudadResidencia().getNombre() == ciudad && empleado.getPuesto() == "Concejo") {
                 cout << candidato.getNombre() << endl;
                 cantidad++;
             }
@@ -53,13 +75,13 @@ public:
 
     //4. Todos los candidatos a la alcaldï¿½a de una ciudad.
 
-    void candidatosAlcaldia(string ciudad, Lista < Candidato > * candidatos) {
+    void candidatosAlcaldia(string ciudad, Lista < Empleado > * empleados) {
         int cantidad = 0;
-        for (int i = 0; i < candidatos -> getTam(); i++) {
+        for (int i = 0; i < empleados -> getTam(); i++) {
             //Guardar el candidato buscado y devolver los atributos necesarios dada la validacion
-            Candidato candidato = candidatos -> buscar(i);
-            if (candidato.getCiudadResidencia().getNombre() == ciudad && candidato.getPuesto() == "Alcaldia") {
-                cout << candidatos -> buscar(i).getNombre() << endl;
+            Empleado empleado = empleados -> buscar(i);
+            if (empleado.getCiudadResidencia().getNombreCiudad() == ciudad && empleado.getPuesto() == "Alcaldia") {
+                cout << empleados -> buscar(i).getNombre() << endl;
                 cantidad++;
             }
         }
@@ -119,4 +141,5 @@ public:
         system("Pause"); // Pausa el programa y espera a que se presione una tecla
     }
 
+>>>>>>> abcc5b659a4a6ccef4106c323e6536850b6de452
 };

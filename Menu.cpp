@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-#include "Clases Principales/Inicializar.cpp"
+#include "ClasesPrincipales/Inicializar.cpp"
 
 class Menu {
 private:
@@ -26,7 +26,7 @@ public:
 
     void leerArchivos() {
         Archivos Ciudades("Ciudades");
-        Archivos Sucursal("sucursales");
+        Archivos Sucursal("Sucursales");
         Archivos Empleados("Empleados");
 
         ciudades = Ciudades.leerCiudades();
@@ -132,7 +132,7 @@ void Simulacion::Menu() {
                                 //Creaci�n del Objeto partido
                                 Sucursal nuevaSucursal = inicializar.inicializarSucursal(sucursales);
                                 //Inserci�n en la lista de sucursales
-                                sucursales -> insertar(nuevaSucursal;
+                                sucursales -> insertar(nuevaSucursal);
 
                                 Opcion = 0;
                                 break;
@@ -379,7 +379,7 @@ void Simulacion::MostrarMenu() {
 void Simulacion::SubMenuListas() {
     cout << "Buscar Listas por categoria" << endl;
     cout << "1. Ciudades." << endl;
-    cout << "2. sucursales" << endl;
+    cout << "2. Sucursales" << endl;
     cout << "3. Todos los empleados de una ciudad." << endl;
     cout << "4. Todos los empleados de una sucursal." << endl;
 }

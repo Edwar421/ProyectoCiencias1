@@ -5,7 +5,7 @@
 
 #include "Estructuras de Datos/ArbolConsultas.h"
 
-#include "Clases Principales/Candidato.h"
+#include "ClasesPrincipales/Empleado.h"
 
 #include "Estructuras de Datos/ArbolRojiNegro.h"
 
@@ -15,17 +15,17 @@ class OpcionesConsultas
 {
 private:
     // Lista<NodoCiudad> *listaArboles = new Lista<NodoCiudad>;            // Cada ciudad tiene un arbol
-    ArbolRojiNegro<string, ArbolConsultas<Partido>> *arbolCiudades = new ArbolRojiNegro<string, ArbolConsultas<Partido>>; // Cada ciudad tiene un arbol
-    ArbolRojiNegro<string, ArbolConsultas<Ciudad>> *arbolPartidos = new ArbolRojiNegro<string, ArbolConsultas<Ciudad>>;   // Cada partido tiene una estructura nodoCiudad
+    ArbolRojiNegro<string, ArbolConsultas<Sucursal>> *arbolCiudades = new ArbolRojiNegro<string, ArbolConsultas<Sucursal>>; // Cada ciudad tiene un arbol
+    ArbolRojiNegro<string, ArbolConsultas<Ciudad>> *arbolPartidos = new ArbolRojiNegro<string, ArbolConsultas<Ciudad>>;   // Cada surcusal tiene una estructura nodoCiudad
 
 public:
-    OpcionesConsultas(Lista<Ciudad> *ciudades, Lista<Partido> *partidos, Lista<Candidato> *candidatos);
+    OpcionesConsultas(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados);
 
     // Funcion que calcula la edad
-    int calcularEdad(Candidato *auxCandidato);
-    void actualizar(Lista<Ciudad> *ciudades, Lista<Partido> *partidos, Lista<Candidato> *candidatos);
-    void agregarDatosArbolCiudades(Lista<Ciudad> *ciudades, Lista<Partido> *partidos, Lista<Candidato> *candidatos);
-    void agregarDatosArbolPartidos(Lista<Ciudad> *ciudades, Lista<Partido> *partidos, Lista<Candidato> *candidatos);
+    int calcularEdad(Empleado *auxEmpleado);
+    void actualizar(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados);
+    void agregarDatosArbolCiudades(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados);
+    void agregarDatosArbolSucursales(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados);
 
     void consulta1(string partido, string ciudad);
     void consulta2(string partido);
@@ -37,18 +37,18 @@ public:
 };
 
 // Constrctor
-OpcionesConsultas::OpcionesConsultas(Lista<Ciudad> *ciudades, Lista<Partido> *partidos, Lista<Candidato> *candidatos)
+OpcionesConsultas::OpcionesConsultas(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados)
 {
     actualizar(ciudades, partidos, candidatos);
 }
 
-void OpcionesConsultas::actualizar(Lista<Ciudad> *ciudades, Lista<Partido> *partidos, Lista<Candidato> *candidatos)
+void OpcionesConsultas::actualizar(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados)
 {
     agregarDatosArbolCiudades(ciudades, partidos, candidatos);
     agregarDatosArbolPartidos(ciudades, partidos, candidatos);
 }
 
-void OpcionesConsultas::agregarDatosArbolCiudades(Lista<Ciudad> *ciudades, Lista<Partido> *partidos, Lista<Candidato> *candidatos)
+void OpcionesConsultas::agregarDatosArbolCiudades(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados)
 {
     // Se agregan las ciudades al arbolRN
     for (int i = 0; i < ciudades->getTam(); i++)
@@ -57,9 +57,9 @@ void OpcionesConsultas::agregarDatosArbolCiudades(Lista<Ciudad> *ciudades, Lista
     }
 
     // Se agregan lo nodos del arbol a una lista para manejarlos facilmente
-    Cola<NodoArbol<string, ArbolConsultas<Partido>> *> CInOrden = arbolCiudades->obtenerInOrden(arbolCiudades->obtenerRaiz());
-    Lista<NodoArbol<string, ArbolConsultas<Partido>> *> ciudadesArbolRN;
-    NodoArbol<string, ArbolConsultas<Partido>> *nodoAux; // Nodo auxiliar para insertar arbol
+    Cola<NodoArbol<string, ArbolConsultas<Sucursal>> *> CInOrden = arbolCiudades->obtenerInOrden(arbolCiudades->obtenerRaiz());
+    Lista<NodoArbol<string, ArbolConsultas<Sucursal>> *> ciudadesArbolRN;
+    NodoArbol<string, ArbolConsultas<Sucursal>> *nodoAux; // Nodo auxiliar para insertar arbol
     while (!CInOrden.isVacia())
     {
         nodoAux = CInOrden.dequeue();
@@ -70,34 +70,34 @@ void OpcionesConsultas::agregarDatosArbolCiudades(Lista<Ciudad> *ciudades, Lista
     for (int i = 0; i < ciudadesArbolRN.getTam(); i++) // Se crean arboles
     {
         nodoAux = ciudadesArbolRN.buscar(i);
-        nodoAux->data = new ArbolConsultas<Partido>;
+        nodoAux->data = new ArbolConsultas<Sucursal>;
         nodoAux->data->cambiarNombre(nodoAux->clave);
         for (int i = 0; i < partidos->getTam(); i++) // agrega partido
         {
-            nodoAux->data->agregarNodoConsulta(partidos->buscar(i));
+            nodoAux->data->agregarNodoConsulta(sucursales->buscar(i));
         }
     }
 
     // Se agregan los candidatos a la ciudad y partido correspondiente
-    for (int i = 0; i < candidatos->getTam(); i++)
+    for (int i = 0; i < empleados->getTam(); i++)
     {
-        Candidato *auxCandidato = candidatos->buscarApuntador(i);
-        nodoAux = arbolCiudades->buscar(auxCandidato->getCiudadResidencia().getNombre()); // busca la ciudad la cual debe agregar el cadidato
-        if(nodoAux->clave == auxCandidato->getCiudadResidencia().getNombre()) // valida que la ciudad corresponda
-            nodoAux->data->agregarCandidato(auxCandidato, auxCandidato->getPartido().getNombre());
+        Empleado *auxEmpleado = empleados->buscarApuntador(i);
+        nodoAux = arbolCiudades->buscar(auxEmpleado->getCiudadResidencia().getNombre()); // busca la ciudad la cual debe agregar el cadidato
+        if(nodoAux->clave == auxEmpleado->getCiudadResidencia().getNombre()) // valida que la ciudad corresponda
+            nodoAux->data->agregarEmpleado(auxEmpleadao, auxEmpleado->getSucursal().getNombre());
     }
 }
 
-void OpcionesConsultas::agregarDatosArbolPartidos(Lista<Ciudad> *ciudades, Lista<Partido> *partidos, Lista<Candidato> *candidatos)
+void OpcionesConsultas::agregarDatosArbolSucursales(Lista<Ciudad> *ciudades, Lista<Sucursal> *sucursales, Lista<Empleado> *empleados)
 {
     // Se agregan los partidos al arbolRN
-    for (int i = 0; i < partidos->getTam(); i++)
+    for (int i = 0; i < sucursales->getTam(); i++)
     {
-        arbolPartidos->insertarNodo(partidos->buscar(i).getNombre());
+        arbolSucursales->insertarNodo(sucursales->buscar(i).getNombre());
     }
 
     // Se agregan lo nodos del arbol a una lista para manejarlos facilmente
-    Cola<NodoArbol<string, ArbolConsultas<Ciudad>> *> CInOrden = arbolPartidos->obtenerInOrden(arbolPartidos->obtenerRaiz());
+    Cola<NodoArbol<string, ArbolConsultas<Ciudad>> *> CInOrden = arbolSucursales->obtenerInOrden(arbolSucursales->obtenerRaiz());
     Lista<NodoArbol<string, ArbolConsultas<Ciudad>> *> partidosArbolRN;
     NodoArbol<string, ArbolConsultas<Ciudad>> *nodoAux; // Nodo auxiliar para insertar arbol
     while (!CInOrden.isVacia())
@@ -119,24 +119,24 @@ void OpcionesConsultas::agregarDatosArbolPartidos(Lista<Ciudad> *ciudades, Lista
     }
 
     // Se agregan los candidatos al partido y ciudad correspondiente
-    for (int i = 0; i < candidatos->getTam(); i++)
+    for (int i = 0; i < empleados->getTam(); i++)
     {
-        Candidato *auxCandidato = candidatos->buscarApuntador(i);
-        nodoAux = arbolPartidos->buscar(auxCandidato->getPartido().getNombre()); // busca la ciudad la cual debe agregar el cadidato
-        if(nodoAux->clave == auxCandidato->getPartido().getNombre()) // valida que el partido corresponda
-            nodoAux->data->agregarCandidato(auxCandidato, auxCandidato->getCiudadResidencia().getNombre());
+        Empleado *auxEmpleado = empleados->buscarApuntador(i);
+        nodoAux = arbolSucursales->buscar(auxEmpleado->getSucursal().getNombre()); // busca la ciudad la cual debe agregar el cadidato
+        if(nodoAux->clave == auxEmpleado->getSucursal().getNombre()) // valida que el partido corresponda
+            nodoAux->data->agregarEmpleado(auxEmpleado, auxEmpleado->getCiudadResidencia().getNombre());
     }
 }
 
-int OpcionesConsultas::calcularEdad(Candidato *auxCandidato)
+int OpcionesConsultas::calcularEdad(Empleado *auxEmpleado)
 {
-    if(auxCandidato->getFechaNacimiento().length() != 10)
+    if(auxEmpleado->getFechaNacimiento().length() != 10)
         return 0;
 
     // Se calcular la edad partiendo en sub string con las posiciones necesarias para obtener dia, mes, anio
-    int diaNacimiento = stoi(auxCandidato->getFechaNacimiento().substr(0, 2));
-    int mesNacimiento = stoi(auxCandidato->getFechaNacimiento().substr(3, 2));
-    int anioNacimiento = stoi(auxCandidato->getFechaNacimiento().substr(6, 4));
+    int diaNacimiento = stoi(auxEmpleado->getFechaNacimiento().substr(0, 2));
+    int mesNacimiento = stoi(auxEmpleado->getFechaNacimiento().substr(3, 2));
+    int anioNacimiento = stoi(auxEmpleado->getFechaNacimiento().substr(6, 4));
     // Obtener la fecha actual
     time_t tiempoActual = time(nullptr);
     tm *fechaActual = localtime(&tiempoActual);
