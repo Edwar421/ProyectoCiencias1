@@ -44,6 +44,9 @@ public:
             Empelado empleado = empleados -> buscar(i);
             cout << i << ". " << candidato.getNombre() << " " << candidato.getApellido() << " " << candidato.getTipoIdentificacion() << " " << candidato.NumIdentificacion() << " " << candidato.getSucursal().getNombreSucursal() << "/n" << endl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> abcc5b659a4a6ccef4106c323e6536850b6de452
+=======
 >>>>>>> abcc5b659a4a6ccef4106c323e6536850b6de452
 =======
 >>>>>>> abcc5b659a4a6ccef4106c323e6536850b6de452
