@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// Definiciï¿½n de la clase Nodo
+// Definición de la clase Nodo
 template < typename T >
 class Nodo {
 public: T valor;
@@ -14,11 +14,11 @@ public: T valor;
     // Constructor de la clase Nodo
     Nodo(T valor) {
         this -> valor = valor;
-        this -> siguiente = nullptr;
+        this -> siguiente = NULL;
     }
 };
 
-// Definiciï¿½n de la clase Lista
+// Definición de la clase Lista
 template < typename T >
 class Lista {
 private: Nodo < T > * inicio;
@@ -28,8 +28,8 @@ private: Nodo < T > * inicio;
 public:
     // Constructor de la clase Lista
     Lista() {
-        inicio = nullptr;
-        fin = nullptr;
+        inicio = NULL;
+        fin = NULL;
         tam = 0;
     }
 
@@ -38,7 +38,7 @@ public:
         Nodo < T > * actual = inicio;
         Nodo < T > * tmp;
         // Se recorre la lista liberando la memoria de cada nodo
-        while (actual != nullptr) {
+        while (actual != NULL) {
             tmp = actual -> siguiente;
             delete actual;
             actual = tmp;
@@ -49,7 +49,7 @@ public:
         Nodo < T > * nuevo = new Nodo < T > (valor);
 
         // Si la lista estï¿½ vacï¿½a, el nuevo nodo serï¿½ tanto el primero como el ï¿½ltimo
-        if (inicio == nullptr) {
+        if (inicio == NULL) {
             inicio = nuevo;
             fin = nuevo;
         }
@@ -86,8 +86,8 @@ public:
         Nodo < T > * tmp;
         if (pos == 0) {
             inicio = actual -> siguiente;
-            if (inicio == nullptr) {
-                fin = nullptr;
+            if (inicio == NULL) {
+                fin = NULL;
             }
             delete actual;
         } else {
@@ -96,7 +96,7 @@ public:
             }
             tmp = actual -> siguiente;
             actual -> siguiente = tmp -> siguiente;
-            if (actual -> siguiente == nullptr) {
+            if (actual -> siguiente == NULL) {
                 fin = actual;
             }
             delete tmp;
@@ -149,7 +149,7 @@ public:
 
     bool existe(T valor) {
         Nodo < T > * actual = inicio;
-        while (actual != nullptr) {
+        while (actual != NULL) {
             if (actual -> valor == valor) {
                 return true;
             }
